@@ -9,5 +9,8 @@ class HomeController extends GetxController{
   HomeController() {
     print('NGƯỜI DÙNG PHIÊN: ${user.toJson()}');
   }
-
+  void signOut(){
+    GetStorage().remove('user');
+    Get.offNamedUntil('/', (route) => false);//Xóa lịch sử màn hình
+  }
 }

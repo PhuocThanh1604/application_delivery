@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:udemy_flutter_delivery/src/models/user.dart';
 import 'package:udemy_flutter_delivery/src/providers/user_provider.dart';
 
@@ -12,7 +15,8 @@ class RegisterController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
-
+  ImagePicker picker =ImagePicker();
+  File? imageFile;
   void register() async {
     String email = emailController.text.trim();
     String name = nameController.text;
@@ -37,7 +41,8 @@ class RegisterController extends GetxController {
         Get.snackbar('Success', 'User registered successfully!');
       } catch (e) {
         print('Error during registration: $e');
-        Get.snackbar('Error', 'An error occurred during registration. Please try again later.');
+        Get.snackbar('Error',
+            'An error occurred during registration. Please try again later.');
       }
     }
   }
@@ -77,5 +82,43 @@ class RegisterController extends GetxController {
       return false;
     }
     return true;
+  }
+Future selectImage(ImageSource imageSource)async {
+    XFile? image = await picker.pickImage(source: imageSource);
+    if(image !=null) {
+      imageFile =File(image.path);
+      update();
+    }
+}
+
+
+  void showAlerDialog(BuildContext context) {
+    Widget galleryButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.gallery);
+        },
+        child: Text(
+          'Phòng trưng bày',
+          style: TextStyle(color: Colors.black),
+        ));
+    Widget cameraButton = ElevatedButton(
+        onPressed: () {
+          Get.back();
+          selectImage(ImageSource.camera);
+        },
+        child: Text(
+          'Camera',
+          style: TextStyle(color: Colors.black),
+        ));
+    AlertDialog alertDialog = AlertDialog(
+      title: Text('chọn một tùy chọn'),
+      actions: [galleryButton, cameraButton],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 }

@@ -2,8 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Tôi cần quyền để truy cập thư viện ảnh</string>
+   <key>NSCameraUsageDescription</key>
+    <string>Tôi cần quyền để truy cập máy ảnh</string>
+    <key>NSMicrophoneUsageDescription</key>
+        <string>Tôi cần quyền để truy cập mic</string>
 	<key>CFBundleDisplayName</key>
 	<string>Udemy Flutter Delivery</string>
 	<key>CFBundleExecutable</key>
