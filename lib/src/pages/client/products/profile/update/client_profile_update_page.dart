@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:udemy_flutter_delivery/src/pages/resgister/register_controller.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/products/profile/update/client_profile_update_controller.dart';
 
-class ResgisterPage extends StatelessWidget {
-  RegisterController con = Get.put(RegisterController());
+class ClientProfileUpdatePage extends StatelessWidget {
 
+  ClientProfileUpdateController con = Get.put(ClientProfileUpdateController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ResgisterPage extends StatelessWidget {
 
   Widget _boxForm(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.65,
+      height: MediaQuery.of(context).size.height * 0.43,
       margin: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3, left: 50, right: 50),
       decoration: BoxDecoration(color: Colors.white, boxShadow: <BoxShadow>[
@@ -34,13 +34,10 @@ class ResgisterPage extends StatelessWidget {
         child: Column(
           children: [
             _TextYourInfo(),
-            _textFieldEmail(),
             _textFieldName(),
             _textFieldLastName(),
             _textFieldPhone(),
-            _textFieldPassword(),
-            _textFieldConfirmPassword(),
-            _buttonRegister(context)
+            _buttonUpdate(context)
           ],
         ),
       ),
@@ -50,12 +47,12 @@ class ResgisterPage extends StatelessWidget {
   Widget _buttonBack() {
     return SafeArea(
         child: Container(
-      margin: EdgeInsets.only(left: 20),
-      child: IconButton(
-        onPressed: () => Get.back(),
-        icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
-      ),
-    ));
+          margin: EdgeInsets.only(left: 20),
+          child: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30),
+          ),
+        ));
   }
 
   Widget _TextYourInfo() {
@@ -64,18 +61,7 @@ class ResgisterPage extends StatelessWidget {
         child: Text('YOUR INFORMATION', style: TextStyle(color: Colors.black)));
   }
 
-  Widget _textFieldEmail() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40),
-      child: TextField(
-        controller: con.emailController,
-        keyboardType: TextInputType.emailAddress,
-        obscureText: false,
-        decoration:
-            InputDecoration(hintText: 'Email', prefixIcon: Icon(Icons.email)),
-      ),
-    );
-  }
+
 
   Widget _textFieldName() {
     return Container(
@@ -85,7 +71,7 @@ class ResgisterPage extends StatelessWidget {
         keyboardType: TextInputType.text,
         obscureText: false,
         decoration:
-            InputDecoration(hintText: 'Name', prefixIcon: Icon(Icons.person)),
+        InputDecoration(hintText: 'Name', prefixIcon: Icon(Icons.person)),
       ),
     );
   }
@@ -111,48 +97,24 @@ class ResgisterPage extends StatelessWidget {
         keyboardType: TextInputType.phone,
         obscureText: false,
         decoration:
-            InputDecoration(hintText: 'Phone', prefixIcon: Icon(Icons.phone)),
+        InputDecoration(hintText: 'Phone', prefixIcon: Icon(Icons.phone)),
       ),
     );
   }
 
-  Widget _textFieldConfirmPassword() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40),
-      child: TextField(
-        controller: con.confirmPasswordController,
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration: InputDecoration(
-            hintText: 'Confirm Password', prefixIcon: Icon(Icons.lock_outline)),
-      ),
-    );
-  }
 
-  Widget _textFieldPassword() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40),
-      child: TextField(
-        controller: con.passwordController,
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration:
-            InputDecoration(hintText: 'Password', prefixIcon: Icon(Icons.lock)),
-      ),
-    );
-  }
 
-  Widget _buttonRegister(BuildContext context) {
+
+
+  Widget _buttonUpdate(BuildContext context) {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
       child: ElevatedButton(
-          onPressed: () {
-            con.register(context);
-          },
+          onPressed: () =>con.updateInfo(context),
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15)),
-          child: Text('REGISTER', style: TextStyle(color: Colors.black))),
+          child: Text('Update', style: TextStyle(color: Colors.black))),
     );
   }
 
@@ -167,22 +129,23 @@ class ResgisterPage extends StatelessWidget {
   Widget _imageUser(BuildContext context) {
     //SET STATE = CTRL+S
 
-
     return SafeArea(
       child: Container(
         margin: EdgeInsets.only(top: 25),
         alignment: Alignment.topCenter,
         child: GestureDetector(
-          onTap: () =>con.showAlerDialog(context),
-          child: GetBuilder<RegisterController>(
-            builder: (value) => CircleAvatar(
-              backgroundImage:con.imageFile !=null
-                  ?  FileImage(con.imageFile!)
-                  : AssetImage('assets/img/user_profile.png') as ImageProvider,
-              radius: 60,
-              backgroundColor: Colors.white,
-            ),
-          )
+            onTap: () =>con.showAlerDialog(context),
+            child: GetBuilder<ClientProfileUpdateController>(
+              builder: (value) => CircleAvatar(
+                backgroundImage:con.imageFile !=null
+                    ?  FileImage(con.imageFile!)
+                    : con.user.image !=null
+                    ? NetworkImage(con.user.image!)
+                    : AssetImage('assets/img/user_profile.png') as ImageProvider,
+                radius: 60,
+                backgroundColor: Colors.white,
+              ),
+            )
         ),
       ),
     );
@@ -195,7 +158,6 @@ class ResgisterPage extends StatelessWidget {
           fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
     );
   }
-
 
 
 }

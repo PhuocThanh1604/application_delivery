@@ -18,6 +18,8 @@ class RegisterController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
+
+
   ImagePicker picker = ImagePicker();
   File? imageFile;
 

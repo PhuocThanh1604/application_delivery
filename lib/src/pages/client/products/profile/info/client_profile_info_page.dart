@@ -15,6 +15,7 @@ class ClientProfileInfoPage extends StatelessWidget {
           _backgroundCover(context),
           _boxForm(context),
           _imageUser(context),
+          _buttonSignOut()
         ],
       ),
     );
@@ -47,7 +48,7 @@ class ClientProfileInfoPage extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () =>con.goToProfileUpdate(),
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15)),
           child:
@@ -89,31 +90,42 @@ class ClientProfileInfoPage extends StatelessWidget {
     );
   }
 
-
   Widget _TextName() {
     return Container(
-      margin: EdgeInsets.only(top:10),
+      margin: EdgeInsets.only(top: 10),
       child: ListTile(
         leading: Icon(Icons.person),
-        title:Text( '${con.user.name ?? ''}${con.user.lastname ?? ''}'),
-        subtitle:Text('User name') ,
+        title: Text('${con.user.name ?? ''}${con.user.lastname ?? ''}'),
+        subtitle: Text('User name'),
       ),
     );
   }
+
   Widget _TextEmail() {
-    return  ListTile(
+    return ListTile(
       leading: Icon(Icons.email),
       title: Text(con.user.email ?? ''),
-      subtitle:Text('Email') ,
+      subtitle: Text('Email'),
     );
-
   }
 
   Widget _TextPhone() {
     return ListTile(
       leading: Icon(Icons.phone),
       title: Text(con.user.phone ?? ''),
-      subtitle:Text('Telephone') ,
+      subtitle: Text('Telephone'),
     );
+  }
+
+  Widget _buttonSignOut() {
+    return SafeArea(
+        child: Container(
+      margin: EdgeInsets.only(right: 20),
+      alignment: Alignment.topRight,
+      child: IconButton(
+        onPressed: () => con.signOut(),
+        icon: Icon(Icons.power_settings_new, color: Colors.white, size: 30),
+      ),
+    ));
   }
 }
