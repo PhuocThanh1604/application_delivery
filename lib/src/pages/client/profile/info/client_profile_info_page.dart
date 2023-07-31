@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:udemy_flutter_delivery/src/pages/client/products/list/client_products_list_controller.dart';
-import 'package:udemy_flutter_delivery/src/pages/client/products/profile/info/client_profile_info_controller.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/profile/info/client_profile_info_controller.dart';
 
 class ClientProfileInfoPage extends StatelessWidget {
   ClientProfileInfoController con = Get.put(ClientProfileInfoController());
@@ -9,7 +9,7 @@ class ClientProfileInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Obx(()=> Stack( //Obx loading data
         //POSICIONAR ELEMEMTOS UNO DEL OTRO
         children: [
           _backgroundCover(context),
@@ -18,6 +18,7 @@ class ClientProfileInfoPage extends StatelessWidget {
           _buttonSignOut()
         ],
       ),
+    )
     );
   }
 
@@ -72,8 +73,8 @@ class ClientProfileInfoPage extends StatelessWidget {
         margin: EdgeInsets.only(top: 25),
         alignment: Alignment.topCenter,
         child: CircleAvatar(
-          backgroundImage: con.user.image != null
-              ? NetworkImage(con.user.image!)
+          backgroundImage: con.user.value.image != null
+              ? NetworkImage(con.user.value.image!)
               : AssetImage('assets/img/user_profile.png') as ImageProvider,
           radius: 60,
           backgroundColor: Colors.white,
@@ -95,7 +96,7 @@ class ClientProfileInfoPage extends StatelessWidget {
       margin: EdgeInsets.only(top: 10),
       child: ListTile(
         leading: Icon(Icons.person),
-        title: Text('${con.user.name ?? ''}${con.user.lastname ?? ''}'),
+        title: Text('${con.user.value.name ?? ''}${con.user.value.lastname ?? ''}'),
         subtitle: Text('User name'),
       ),
     );
@@ -104,7 +105,7 @@ class ClientProfileInfoPage extends StatelessWidget {
   Widget _TextEmail() {
     return ListTile(
       leading: Icon(Icons.email),
-      title: Text(con.user.email ?? ''),
+      title: Text(con.user.value.email ?? ''),
       subtitle: Text('Email'),
     );
   }
@@ -112,7 +113,7 @@ class ClientProfileInfoPage extends StatelessWidget {
   Widget _TextPhone() {
     return ListTile(
       leading: Icon(Icons.phone),
-      title: Text(con.user.phone ?? ''),
+      title: Text(con.user.value.phone ?? ''),
       subtitle: Text('Telephone'),
     );
   }

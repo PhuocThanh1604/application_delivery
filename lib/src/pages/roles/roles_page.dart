@@ -6,7 +6,6 @@ class RolesPage extends StatelessWidget {
 
   RolesController con = Get.put(RolesController());
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:udemy_flutter_delivery/src/pages/client/products/profile/update/client_profile_update_controller.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/profile/update/client_profile_update_controller.dart';
 
 class ClientProfileUpdatePage extends StatelessWidget {
 
