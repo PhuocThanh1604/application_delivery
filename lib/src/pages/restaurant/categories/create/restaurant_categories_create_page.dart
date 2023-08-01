@@ -85,7 +85,7 @@ class RestaurantCategoriesCreatePage extends StatelessWidget {
           onPressed: () => {con.createCategory()},
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15)),
-          child: Text('Update', style: TextStyle(color: Colors.black))),
+          child: Text('New category', style: TextStyle(color: Colors.black))),
     );
   }
 
@@ -108,7 +108,7 @@ class RestaurantCategoriesCreatePage extends StatelessWidget {
             children: [
               Icon(Icons.category, size: 100),
               Text(
-                'New Categories',
+                'Create Categories',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
               ),
             ],
