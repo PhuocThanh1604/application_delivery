@@ -6,13 +6,18 @@ import 'package:udemy_flutter_delivery/src/pages/client/products/detail/client_p
 
 class ClientProductsDetailPage extends StatelessWidget {
   Product? product;
-  ClientProductsDetailController con =
-      Get.put(ClientProductsDetailController());
-  ClientProductsDetailPage({@required this.product});
+  late ClientProductsDetailController con;
+  var counter = 0.obs;
+  var price = 0.0.obs;
+
+  ClientProductsDetailPage({@required this.product}) {
+    con = Get.put(ClientProductsDetailController());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    con.checkIfProductsWasAdded(product!, price, counter);
+    return Obx(() => Scaffold(
         bottomNavigationBar: Container(height: 100, child: _buttonsAddToBag()),
         body: Column(
           children: [
@@ -21,7 +26,7 @@ class ClientProductsDetailPage extends StatelessWidget {
             _textDescriptionProduct(),
             _texPriceProduct()
           ],
-        ));
+        )));
   }
 
   Widget _textNameProduct() {
@@ -69,11 +74,11 @@ class ClientProductsDetailPage extends StatelessWidget {
           color: Colors.grey[400],
         ),
         Container(
-          margin: EdgeInsets.only(left:30,right: 30,top:25),
+          margin: EdgeInsets.only(left: 30, right: 30, top: 25),
           child: Row(
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => con.removeItem(product!,price,counter),
                 child: Text(
                   '-',
                   style: TextStyle(color: Colors.black, fontSize: 18),
@@ -88,14 +93,14 @@ class ClientProductsDetailPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 child: Text(
-                  '0',
+                  '${counter.value}',
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.white, minimumSize: Size(40, 37)),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => con.addItem(product!,price,counter),
                 child: Text(
                   '+',
                   style: TextStyle(color: Colors.black, fontSize: 18),
@@ -109,17 +114,15 @@ class ClientProductsDetailPage extends StatelessWidget {
               ),
               Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => con.addToBag(product!,price,counter),
                 child: Text(
-                  'Add Product ${product?.price??''}',
+                  'Add Product \$${price.value}',
                   style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.amber,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)
-                    )
-                ),
+                        borderRadius: BorderRadius.circular(25))),
               ),
             ],
           ),
