@@ -45,7 +45,7 @@ class ClientAddressCreatePage extends StatelessWidget {
             _TextYourInfo(),
             _textFieldAddress(),
             _textFieldNeighborhood(),
-            _textFieldRefPoint(),
+            _textFieldRefPoint(context),
             SizedBox(
               height: 20,
             ),
@@ -88,15 +88,19 @@ class ClientAddressCreatePage extends StatelessWidget {
     );
   }
 
-  Widget _textFieldRefPoint() {
+  Widget _textFieldRefPoint(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        onTap: () => con.openGoogleMaps(context),
         controller: con.neighborhoodController,
+        autofocus: false,
+        focusNode: AlwayDisabledFocusNode(),
         keyboardType: TextInputType.text,
         obscureText: false,
         decoration: InputDecoration(
-            hintText: 'Reference point', prefixIcon: Icon(Icons.map)),
+            hintText: 'Reference point',
+            prefixIcon: Icon(Icons.map)),
       ),
     );
   }
@@ -148,4 +152,11 @@ class ClientAddressCreatePage extends StatelessWidget {
           fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
     );
   }
+
+}
+
+class AlwayDisabledFocusNode extends FocusNode{
+  @override
+  bool get hasFocus => false;
+
 }
