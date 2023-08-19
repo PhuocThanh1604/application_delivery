@@ -5,8 +5,6 @@ import 'package:udemy_flutter_delivery/src/models/product.dart';
 
 class ClientProductsDetailController extends GetxController {
 
-
-
   List<Product> selectedProducts = [];
 
   ClientProductsDetailController() {

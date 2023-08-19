@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:udemy_flutter_delivery/src/models/user.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/address/create/client_address_create_page.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/address/list/client_address_list_page.dart';
 import 'package:udemy_flutter_delivery/src/pages/client/home/client_home_page.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/orders/create/client_orders_create_page.dart';
 import 'package:udemy_flutter_delivery/src/pages/client/products/list/client_products_list_page.dart';
-import 'package:udemy_flutter_delivery/src/pages/client/profile/info/client_profile_info_page.dart';
-import 'package:udemy_flutter_delivery/src/pages/client/profile/update/client_profile_update_page.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/products/profile/info/client_profile_info_page.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/products/profile/update/client_profile_update_page.dart';
 import 'package:udemy_flutter_delivery/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 import 'package:udemy_flutter_delivery/src/pages/home/home_page.dart';
 import 'package:udemy_flutter_delivery/src/pages/login/login_page.dart';
@@ -52,6 +55,12 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/client/home', page: () => ClientHomePage()),
         GetPage(name: '/client/profile/info', page: () => ClientProfileInfoPage()),
         GetPage(name: '/client/profile/update', page: () => ClientProfileUpdatePage()),
+        GetPage(name: '/client/orders/create', page: () => ClientOrdersCreatePage()),
+        GetPage(name: '/client/address/create', page: () => ClientAddressCreatePage()),
+        GetPage(name: '/client/address/list', page: () => ClientAddressListPage()),
+
+
+
       ],
       theme: ThemeData(
           primaryColor: Colors.amber,

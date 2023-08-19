@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:udemy_flutter_delivery/src/pages/client/products/list/client_products_list_controller.dart';
-import 'package:udemy_flutter_delivery/src/pages/client/profile/info/client_profile_info_controller.dart';
+import 'package:udemy_flutter_delivery/src/pages/client/products/profile/info/client_profile_info_controller.dart';
 
 class ClientProfileInfoPage extends StatelessWidget {
   ClientProfileInfoController con = Get.put(ClientProfileInfoController());
@@ -37,7 +37,13 @@ class ClientProfileInfoPage extends StatelessWidget {
             _TextName(),
             _TextEmail(),
             _TextPhone(),
-            _buttonUpdate(context),
+            Column(
+              children: [
+                _buttonSignOut(),
+                _buttonRoles()
+              ],
+            )
+
           ],
         ),
       ),
@@ -128,5 +134,16 @@ class ClientProfileInfoPage extends StatelessWidget {
         icon: Icon(Icons.power_settings_new, color: Colors.white, size: 30),
       ),
     ));
+  }
+
+  Widget _buttonRoles() {
+    return Container(
+      margin: EdgeInsets.only(right: 20),
+      alignment: Alignment.topRight,
+      child: IconButton(
+        onPressed: () => con.goToRoles(),
+        icon: Icon(Icons.supervised_user_circle, color: Colors.white, size: 30),
+      ),
+    );
   }
 }
