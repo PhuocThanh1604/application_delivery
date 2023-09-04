@@ -19,6 +19,7 @@ import 'package:udemy_flutter_delivery/src/pages/roles/roles_page.dart';
 User userSession = User.fromJson(GetStorage().read('user')??{});
 void main() async {
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
