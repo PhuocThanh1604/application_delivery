@@ -9,7 +9,7 @@ import GoogleMaps
   ) -> Bool {
     <!-- config map!-->
     GeneratedPluginRegistrant.register(with: self)
-    GMSServices.provideAPIKey:@"AIzaSyD_Uu1btO6mWLrRrPBuw84FkQuLK6tFuLU";
+    GMSServices.provideAPIKey:@"AIzaSyB2kvOckQn8vJlqi8PPnbOzK5dCf-xg3eQ";
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
